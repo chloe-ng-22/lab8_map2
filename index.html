@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title> GeoTag Interactive Mapping Exercise</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+        integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
+        crossorigin="" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.css" />
+</head>
+<style>
+
+.sidebar {
+  position: absolute;
+  left: 0px;
+  width: 250px;
+  top: 0;
+  bottom: 0;
+  overflow-y: auto;
+  padding: 20px;
+  font-size: 16px;
+  border: solid;
+  background-color: #add8e6;
+}
+.main-heading {
+    font-size: 15px;
+}
+</style>
+<body>
+  <div class="sidebar">
+  <font color="#3D9970"><center><h2 id="main-heading" >GeoTag Mapping</h2></center></font>
+  <div>
+
+<div class="row">
+  <div class="column">
+    <center> <img src="images/temple.png" alt="Temple Logo" style="width:60%"> </center>
+  </div>
+  <font color="MidnightBlue"><center><h3> I love interactive maps!</h3></center></font>
+  </div>
+
+<h1> UPenn College Houses </h1>
+<h2> Interactive Map of the Highrises </h2>
+<h3> Guide for Upperclassmen </h3>
+
+<footer>
+       <p> Share this template! <br> https://github.com/mckeont/GeoTag </p>
+</footer>
+
+    <div id="map" style=" position: fixed; right: 0; left: 300px; top: 0; bottom: 0 "></div>
+
+    <!-- JS IMPORTS -->
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js" integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA==" crossorigin=""></script>
+<script src="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.js"></script>
+    <script src= "http://leaflet.github.io/Leaflet.heat/dist/leaflet-heat.js"></script>
+    <script src='https://npmcdn.com/@turf/turf/turf.min.js'></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
+    <script src= "js/setup.js"></script>
+    <script src= "js/rodin.js"></script>
+
+    <script>
+
+// Create a style variable
+    var myStyle = {
+    radius: 5,
+    fillColor: "#ff7800",
+    color: "#000",
+    weight: 1,
+    opacity: 1,
+    fillOpacity: 0.7
+};
+
+//Load in geojson
+    var rodin =   L.geoJSON(rodin, {
+          style: myStyle
+        }).bindPopup(function (layer) {
+       return "" + layer.feature.properties.name
+    }).addTo(map).bringToBack();
+
+// Make a simple circle
+var circle = L.circle([39.983219999796114, -75.15256557830536], {
+    color: 'red',
+    fillColor: '#f03',
+    fillOpacity: 0.5,
+    radius: 5
+}).addTo(map);
+
+// Make a shape
+var polygon = L.polygon([
+  [39.95292220841347,-75.20147412081435],
+  [39.95290034253864, -75.20129639304018],
+  [39.95308872522776,-75.20125689797896],
+  [39.95307274635931,-75.20113841279597],
+  [39.95305592649353,-75.20114170405128],
+  [39.95304919854573,-75.20108794688477],
+  [39.953137502803855,-75.20106929643885],
+  [39.953133297841646,-75.20103967514358],
+  [39.953214033068036,-75.20102212178298],
+  [39.953290563247094,-75.2016331981439],
+  [39.95321066910225,-75.20165404275919],
+  [39.9531997362121,-75.20161674186797],
+  [39.95312909287918,-75.20162880980325],
+  [39.953121523946294,-75.20159480016737],
+  [39.953136661811214,-75.2015849264027],
+  [39.95311647799073, -75.2014324315838],
+  [39.95292304940821, -75.20147302372968]
+]).addTo(map);
+
+// Add a marker
+L.marker([39.95292220841347, -75.20147412081435]).addTo(map);
+    </script>
+
+</body>
+</html>
